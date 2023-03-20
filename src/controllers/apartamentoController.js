@@ -1,7 +1,5 @@
 const { Apartamento } = require("../db");
 
-
-
 const createApartamento = async (numeroApartamento, ubicacion, areaMts, precio, duplex, habitaciones, camasDobles, camasSencillas, camaNido, banos, aguaCaliente, secadorCabello, salaEstar, comedor, sofaCama, televisor, internet, cocina, nevera, lavadora, microondas, cafetera, licuadora, tostadoraPan, ollaPresion, ollaArrocera, sanduchera, camaraSeguridad, terrazaVista) => {
     if (!numeroApartamento) {
         throw Error("Falta dato: numero de apartamento")
@@ -24,7 +22,7 @@ const createApartamento = async (numeroApartamento, ubicacion, areaMts, precio, 
     }
 
     if (precio < 0) {
-        throw Error("Precio no puede ser negativo")
+        throw Error("Precio no puede ser un valor negativo")
     }
 
     if (typeof duplex !== 'boolean') {
@@ -73,7 +71,79 @@ const createApartamento = async (numeroApartamento, ubicacion, areaMts, precio, 
     }
 
     if (typeof aguaCaliente !== 'boolean') {
-        throw Error("Falta dato: duplex y el campo debe ser de tipo boolean");
+        throw Error("Falta dato: aguaCaliente y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof secadorCabello !== 'boolean') {
+        throw Error("Falta dato: secadorCabello y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof salaEstar !== 'boolean') {
+        throw Error("Falta dato: salaEstar y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof comedor !== 'boolean') {
+        throw Error("Falta dato: comedor y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof sofaCama !== 'boolean') {
+        throw Error("Falta dato: sofaCama y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof televisor !== 'boolean') {
+        throw Error("Falta dato: televisor y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof internet !== 'boolean') {
+        throw Error("Falta dato: internet y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof cocina !== 'boolean') {
+        throw Error("Falta dato: cocina y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof nevera !== 'boolean') {
+        throw Error("Falta dato: nevera y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof lavadora !== 'boolean') {
+        throw Error("Falta dato: lavadora y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof microondas !== 'boolean') {
+        throw Error("Falta dato: microondas y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof cafetera !== 'boolean') {
+        throw Error("Falta dato: cafetera y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof licuadora !== 'boolean') {
+        throw Error("Falta dato: licuadora y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof tostadoraPan !== 'boolean') {
+        throw Error("Falta dato: tostadoraPan y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof ollaPresion !== 'boolean') {
+        throw Error("Falta dato: ollaPresion y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof ollaArrocera !== 'boolean') {
+        throw Error("Falta dato: ollaArrocera y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof sanduchera !== 'boolean') {
+        throw Error("Falta dato: ollaArrocera y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof camaraSeguridad !== 'boolean') {
+        throw Error("Falta dato: camaraSeguridad y el campo debe ser de tipo boolean");
+    }
+
+    if (typeof terrazaVista !== 'boolean') {
+        throw Error("Falta dato: terrazaVista y el campo debe ser de tipo boolean");
     }
 
     const newApartamento = await Apartamento.create({
