@@ -1,5 +1,34 @@
 const { Apartamento } = require("../db");
 
+const { Op } = require("sequelize")
+
+// Funcion para traer los Apartamentos
+const getApartamentos = async () => {
+    const apartamentos = await Apartamento.findAll()
+
+
+    return apartamentos;
+}
+
+// Funcion para buscar un apartamento por id
+const getApartamentoById = async (id) => {
+    const apartamento = await Apartamento.findByPk(id);
+    return apartamento;
+}
+
+// Funcion para buscar un apartamento por el numero de apartamento
+const findApartamento = async (numeroApartamento) => {
+    if (numeroApartamento.length > 2) {
+        const searchApartamento = await Apartamento.findAll({
+            where: [
+                { numeroApartamento: { [Op.iLike]: `%${numeroApartamento}%` } },
+            ],
+        })
+    }
+}
+
+
+// Funcion para crear un apartamento
 const createApartamento = async (numeroApartamento, ubicacion, areaMts, precio, duplex, habitaciones, camasDobles, camasSencillas, camaNido, banos, aguaCaliente, secadorCabello, salaEstar, comedor, sofaCama, televisor, internet, cocina, nevera, lavadora, microondas, cafetera, licuadora, tostadoraPan, ollaPresion, ollaArrocera, sanduchera, camaraSeguridad, terrazaVista) => {
     if (!numeroApartamento) {
         throw Error("Falta dato: numero de apartamento")
@@ -146,40 +175,118 @@ const createApartamento = async (numeroApartamento, ubicacion, areaMts, precio, 
         throw Error("Falta dato: terrazaVista y el campo debe ser de tipo boolean");
     }
 
-    const newApartamento = await Apartamento.create({
-        numeroApartamento: numeroApartamento,
-        ubicacion: ubicacion,
-        areaMts: areaMts,
-        precio: precio,
-        duplex: duplex,
-        habitaciones: habitaciones,
-        camasDobles: camasDobles,
-        camasSencillas: camasSencillas,
-        camaNido: camaNido,
-        banos: banos,
-        aguaCaliente: aguaCaliente,
-        secadorCabello: secadorCabello,
-        salaEstar: salaEstar,
-        comedor: comedor,
-        sofaCama: sofaCama,
-        televisor: televisor,
-        internet: internet,
-        cocina: cocina,
-        nevera: nevera,
-        lavadora: lavadora,
-        microondas: microondas,
-        cafetera: cafetera,
-        licuadora: licuadora,
-        tostadoraPan: tostadoraPan,
-        ollaPresion: ollaPresion,
-        ollaArrocera: ollaArrocera,
-        sanduchera: sanduchera,
-        camaraSeguridad: camaraSeguridad,
-        terrazaVista: terrazaVista
-    })
+    const newApartamento = await Apartamento.create(
+        {
+            numeroApartamento: numeroApartamento,
+            ubicacion: ubicacion,
+            areaMts: areaMts,
+            precio: precio,
+            duplex: duplex,
+            habitaciones: habitaciones,
+            camasDobles: camasDobles,
+            camasSencillas: camasSencillas,
+            camaNido: camaNido,
+            banos: banos,
+            aguaCaliente: aguaCaliente,
+            secadorCabello: secadorCabello,
+            salaEstar: salaEstar,
+            comedor: comedor,
+            sofaCama: sofaCama,
+            televisor: televisor,
+            internet: internet,
+            cocina: cocina,
+            nevera: nevera,
+            lavadora: lavadora,
+            microondas: microondas,
+            cafetera: cafetera,
+            licuadora: licuadora,
+            tostadoraPan: tostadoraPan,
+            ollaPresion: ollaPresion,
+            ollaArrocera: ollaArrocera,
+            sanduchera: sanduchera,
+            camaraSeguridad: camaraSeguridad,
+            terrazaVista: terrazaVista
+        }
+    )
 
     return newApartamento;
 }
 
-module.exports = { createApartamento }
+// Funcion para actualizar Apartamento
+const updateApartamento = async (
+    id,
+    numeroApartamento,
+    ubicacion,
+    areaMts,
+    precio,
+    duplex,
+    habitaciones,
+    camasDobles,
+    camasSencillas,
+    camaNido,
+    banos,
+    aguaCaliente,
+    secadorCabello,
+    salaEstar,
+    comedor,
+    sofaCama,
+    televisor,
+    internet,
+    cocina,
+    nevera,
+    lavadora,
+    microondas,
+    cafetera,
+    licuadora,
+    tostadoraPan,
+    ollaPresion,
+    ollaArrocera,
+    sanduchera,
+    camaraSeguridad,
+    terrazaVista
+) => {
+    const apartamentoToUpdate = await Apartamento.findByPk(id);
+    await apartamentoToUpdate.update(
+        {
+            numeroApartamento: numeroApartamento,
+            ubicacion: ubicacion,
+            areaMts: areaMts,
+            precio: precio,
+            duplex: duplex,
+            habitaciones: habitaciones,
+            camasDobles: camasDobles,
+            camasSencillas: camasSencillas,
+            camaNido: camaNido,
+            banos: banos,
+            aguaCaliente: aguaCaliente,
+            secadorCabello: secadorCabello,
+            salaEstar: salaEstar,
+            comedor: comedor,
+            sofaCama: sofaCama,
+            televisor: televisor,
+            internet: internet,
+            cocina: cocina,
+            nevera: nevera,
+            lavadora: lavadora,
+            microondas: microondas,
+            cafetera: cafetera,
+            licuadora: licuadora,
+            tostadoraPan: tostadoraPan,
+            ollaPresion: ollaPresion,
+            ollaArrocera: ollaArrocera,
+            sanduchera: sanduchera,
+            camaraSeguridad: camaraSeguridad,
+            terrazaVista: terrazaVista
+        }
+    )
+}
+
+// Funcion para eliminar Apartamento
+const deleteApartamento = async (id) => {
+    const apertamentoToDelete = await Apartamento.findByPk(id);
+    await apertamentoToDelete.destroy();
+    return apertamentoToDelete
+}
+
+module.exports = { getApartamentos, getApartamentoById, findApartamento, createApartamento, updateApartamento, deleteApartamento }
 
