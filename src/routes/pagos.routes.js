@@ -1,12 +1,21 @@
 const { Router } = require('express');
 const routerPagos = Router();
 
-const { getPagos, getPagoById, createPago, updatePago, deletePago } = require("../controllers/pagoController");
+const { getPagos, getPagoById, findPagos, createPago, updatePago, deletePago } = require("../controllers/pagoController");
 
 // Traer todos los pagos
 routerPagos.get("/", async (req, res) => {
+
+    const { ApartamentoId } = req.query;
+
+    let pagos;
+
     try {
-        const pagos = await getPagos();
+        if (ApartamentoId) {
+            pagos = await findPagos(ApartamentoId);
+        } else {
+            pagos = await getPagos();
+        }
         res.status(200).json(pagos);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -27,8 +36,8 @@ routerPagos.get("/:id", async (req, res) => {
 // Crear un pago
 routerPagos.post("/", async (req, res) => {
     try {
-        const { fechaPago, monto, idApartamento } = req.body;
-        const newPago = await createPago(fechaPago, monto, idApartamento);
+        const { fecha, monto, ApartamentoId } = req.body;
+        const newPago = await createPago(fecha, monto, ApartamentoId);
         res.status(201).json(newPago);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -39,9 +48,9 @@ routerPagos.post("/", async (req, res) => {
 routerPagos.put("/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        const { fechaPago, monto, idApartamento } = req.body;
-        const updatedPago = await updatePago(id, fechaPago, monto, idApartamento);
-        res.status(200).json(updatedPago);
+        const { fechaPago, monto, ApartamentoId } = req.body;
+        const updatedToPago = await updatePago(id, fechaPago, monto, ApartamentoId);
+        res.status(200).json(updatedToPago);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -51,8 +60,8 @@ routerPagos.put("/:id", async (req, res) => {
 routerPagos.delete("/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        const deletedPago = await deletePago(id);
-        res.status(200).json(deletedPago);
+        const deletedToPago = await deletePago(id);
+        res.status(200).json(deletedToPago);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

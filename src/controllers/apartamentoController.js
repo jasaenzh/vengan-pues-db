@@ -1,6 +1,6 @@
 const { Apartamento } = require("../db");
 
-const { Op } = require("sequelize")
+const { Op } = require("sequelize");
 
 // Funcion para traer los Apartamentos
 const getApartamentos = async () => {
@@ -18,7 +18,6 @@ const getApartamentoById = async (id) => {
 
 // Funcion para buscar un apartamento por el numero de apartamento
 const findApartamento = async (numeroApartamento) => {
-    console.log(numeroApartamento)
     if (numeroApartamento.length > 1) {
         const searchApartamento = await Apartamento.findAll({
             where: [

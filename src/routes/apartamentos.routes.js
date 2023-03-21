@@ -8,8 +8,6 @@ const routerApartamentos = Router();
 routerApartamentos.get("/", async (req, res) => {
     const { numeroApartamento } = req.query;
 
-    console.log("Numero Apartamento: " + numeroApartamento)
-
     let apartamentos;
     try {
         if (numeroApartamento) {
@@ -72,38 +70,37 @@ routerApartamentos.post("/", async (req, res) => {
             terrazaVista
         } = req.body;
 
-        const newApartamento = await createApartamento
-            (
-                numeroApartamento,
-                ubicacion,
-                areaMts,
-                precio,
-                duplex,
-                habitaciones,
-                camasDobles,
-                camasSencillas,
-                camaNido,
-                banos,
-                aguaCaliente,
-                secadorCabello,
-                salaEstar,
-                comedor,
-                sofaCama,
-                televisor,
-                internet,
-                cocina,
-                nevera,
-                lavadora,
-                microondas,
-                cafetera,
-                licuadora,
-                tostadoraPan,
-                ollaPresion,
-                ollaArrocera,
-                sanduchera,
-                camaraSeguridad,
-                terrazaVista
-            );
+        const newApartamento = await createApartamento(
+            numeroApartamento,
+            ubicacion,
+            areaMts,
+            precio,
+            duplex,
+            habitaciones,
+            camasDobles,
+            camasSencillas,
+            camaNido,
+            banos,
+            aguaCaliente,
+            secadorCabello,
+            salaEstar,
+            comedor,
+            sofaCama,
+            televisor,
+            internet,
+            cocina,
+            nevera,
+            lavadora,
+            microondas,
+            cafetera,
+            licuadora,
+            tostadoraPan,
+            ollaPresion,
+            ollaArrocera,
+            sanduchera,
+            camaraSeguridad,
+            terrazaVista
+        );
 
         res.status(200).json(newApartamento);
 
@@ -149,41 +146,40 @@ routerApartamentos.put("/:id", async (req, res) => {
             terrazaVista
         } = req.body;
 
-        const updateToApartamento = await updateApartamento
-            (
-                id,
-                numeroApartamento,
-                ubicacion,
-                areaMts,
-                precio,
-                duplex,
-                habitaciones,
-                camasDobles,
-                camasSencillas,
-                camaNido,
-                banos,
-                aguaCaliente,
-                secadorCabello,
-                salaEstar,
-                comedor,
-                sofaCama,
-                televisor,
-                internet,
-                cocina,
-                nevera,
-                lavadora,
-                microondas,
-                cafetera,
-                licuadora,
-                tostadoraPan,
-                ollaPresion,
-                ollaArrocera,
-                sanduchera,
-                camaraSeguridad,
-                terrazaVista
-            );
+        const updateToApartamento = await updateApartamento(
+            id,
+            numeroApartamento,
+            ubicacion,
+            areaMts,
+            precio,
+            duplex,
+            habitaciones,
+            camasDobles,
+            camasSencillas,
+            camaNido,
+            banos,
+            aguaCaliente,
+            secadorCabello,
+            salaEstar,
+            comedor,
+            sofaCama,
+            televisor,
+            internet,
+            cocina,
+            nevera,
+            lavadora,
+            microondas,
+            cafetera,
+            licuadora,
+            tostadoraPan,
+            ollaPresion,
+            ollaArrocera,
+            sanduchera,
+            camaraSeguridad,
+            terrazaVista
+        );
 
-        res.status(200).json(updateApartamento);
+        res.status(200).json(updateToApartamento);
     } catch (error) {
         res.status(400).json({ error: error.message })
     }

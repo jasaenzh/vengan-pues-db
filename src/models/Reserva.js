@@ -19,9 +19,14 @@ module.exports = (database) => {
                 type: DataTypes.DATE,
                 allowNull: false
             },
+            codigoReserva: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
             estado: {
                 type: DataTypes.ENUM("pendiente", "confirmada", "cancelada"),
-                allowNull: false
+                allowNull: false,
+                defaultValue: "pendiente"
             }
         }
     )
