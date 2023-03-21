@@ -1,5 +1,7 @@
 const { Sequelize } = require("sequelize");
 const ApartamentoModel = require("./models/Apartamento")
+const PagoModel = require("./models/Pago");
+const ReservaModel = require("./models/Reserva");
 
 
 //Importo las credenciales
@@ -15,7 +17,17 @@ const database = new Sequelize(
 
 // Definimos los modelos
 ApartamentoModel(database);
+PagoModel(database);
+ReservaModel(database);
 
+const { Apartamento, Pago, Reserva } = database.models
+
+Apartamento.hasMany(Pago);
+Pago.belongsTo(Apartamento);
+
+
+Apartamento.hasMany(Reserva);
+Reserva.belongsTo(Apartamento);
 
 
 module.exports = { database, ...database.models };

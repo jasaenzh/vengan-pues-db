@@ -18,12 +18,16 @@ const getApartamentoById = async (id) => {
 
 // Funcion para buscar un apartamento por el numero de apartamento
 const findApartamento = async (numeroApartamento) => {
-    if (numeroApartamento.length > 2) {
+    console.log(numeroApartamento)
+    if (numeroApartamento.length > 1) {
         const searchApartamento = await Apartamento.findAll({
             where: [
                 { numeroApartamento: { [Op.iLike]: `%${numeroApartamento}%` } },
             ],
         })
+        return searchApartamento;
+    } else {
+        return "Debe de tener por lo menos 2 caracteres"
     }
 }
 

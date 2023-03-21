@@ -6,7 +6,9 @@ const routerApartamentos = Router();
 
 // Traer todos los apartamentos
 routerApartamentos.get("/", async (req, res) => {
-    const { numeroApartamento } = req.body;
+    const { numeroApartamento } = req.query;
+
+    console.log("Numero Apartamento: " + numeroApartamento)
 
     let apartamentos;
     try {

@@ -126,6 +126,9 @@ module.exports = (database) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: false
             }
+        },
+        {
+            timestamps: false,
         }
     )
 }
